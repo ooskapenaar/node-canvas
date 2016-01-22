@@ -19,7 +19,7 @@ has_lib() {
   return 1
 }
 
-printf "%s\n" $OSTYPE >&2
+# printf "%s\n" $OSTYPE >&2
 
 export DARWIN=0
 case $OSTYPE in
