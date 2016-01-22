@@ -7,7 +7,7 @@ has_lib() {
   PATH="$PATH:/sbin"
   export PATH
   # Try using ldconfig on linux systems
-  for LINE in `which ldconfig > /dev/null && ldconfig -p 2>/dev/null | grep -E $regex`; do
+  for LINE in `which ldconfig 2>&1 > /dev/null && ldconfig -p 2>/dev/null | grep -E $regex`; do
     return 0
   done
 
@@ -19,20 +19,9 @@ has_lib() {
   return 1
 }
 
-# printf "%s\n" $OSTYPE >&2
-
-export DARWIN=0
-case $OSTYPE in
-  darwin*)  DARWIN=1 ;;
-esac
-
-if test $DARWIN -eq 1; then
-  echo true
-else
   has_lib $1 > /dev/null
   if test $? -eq 0; then
     echo true
   else
     echo false
   fi
-fi
