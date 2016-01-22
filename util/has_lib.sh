@@ -21,7 +21,12 @@ has_lib() {
 
 printf "%s\n" $OSTYPE >&2
 
-if test $OSTYPE -eq darwin; then
+export DARWIN=0
+case $OSTYPE;
+  darwin*): DARWIN=1
+esac
+
+if test $DARWIN -eq 1; then
   echo true
 else
   has_lib $1 > /dev/null
