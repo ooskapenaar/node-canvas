@@ -19,9 +19,15 @@ has_lib() {
   return 1
 }
 
-has_lib $1 > /dev/null
-if test $? -eq 0; then
+printf "%s\n" $OSTYPE >&2
+
+if test $OSTYPE -eq darwin; then
   echo true
 else
-  echo false
+  has_lib $1 > /dev/null
+  if test $? -eq 0; then
+    echo true
+  else
+    echo false
+  fi
 fi
