@@ -22,8 +22,8 @@ has_lib() {
 printf "%s\n" $OSTYPE >&2
 
 export DARWIN=0
-case $OSTYPE;
-  darwin*): DARWIN=1
+case $OSTYPE in
+  darwin*)  DARWIN=1 ;;
 esac
 
 if test $DARWIN -eq 1; then
